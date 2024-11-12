@@ -31,7 +31,7 @@ def guardarUsuario(datosUsuario: UsuarioDTOPeticion, database: Session = Depends
         database.add(usuario)
         database.commit()
         database.refresh(usuario)
-        return UsuarioDTORespuesta.from_orm(usuario)  # Esto ahora debería funcionar
+        return UsuarioDTORespuesta.from_orm(usuario) 
     except Exception as error:
         database.rollback()
         raise HTTPException(status_code=400, detail=f"Error al guardar el usuario: {(error)}")

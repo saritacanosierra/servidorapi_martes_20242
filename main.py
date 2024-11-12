@@ -5,11 +5,24 @@ from app.api.routes.endpoints import rutas  # Corregido 'endpoindts' a 'endpoint
 from starlette.responses import RedirectResponse
 import uvicorn
 
+from starlette.responses import RedirectResponse
+from starlette.middlewere.cors import CORSMiddleware
+
 # Crear las tablas de SQL desde Python
 Base.metadata.create_all(bind=engine)
 
 # Variable para administrar la aplicación
 app = FastAPI()
+
+
+#configurar el protocolo CORS
+app.add_middleware(
+    CORSMiddleware(
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+))
 
 # Raíz de los endpoints
 @app.get("/")
